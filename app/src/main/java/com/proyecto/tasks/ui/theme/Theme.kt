@@ -1,4 +1,4 @@
-package com.Proyecto.Tareas.ui.theme
+package com.proyecto.tasks.ui.theme
 
 import android.app.Activity
 import android.os.Build

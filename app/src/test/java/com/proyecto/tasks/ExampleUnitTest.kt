@@ -1,4 +1,4 @@
-package com.Proyecto.Tareas
+package com.proyecto.tasks
 
 import org.junit.Test
 

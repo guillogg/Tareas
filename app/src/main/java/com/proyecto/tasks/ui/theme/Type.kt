@@ -1,4 +1,4 @@
-package com.Proyecto.Tareas.ui.theme
+package com.proyecto.tasks.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

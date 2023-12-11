@@ -1,4 +1,4 @@
-package com.Proyecto.Tareas
+package com.proyecto.tasks
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
