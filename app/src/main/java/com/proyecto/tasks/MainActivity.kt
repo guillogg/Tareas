@@ -25,7 +25,7 @@ private val tasksViewModel:TasksViewModel by viewModels()
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    TasksScreen()
+                    TasksScreen(tasksViewModel)
                 }
             }
         }
