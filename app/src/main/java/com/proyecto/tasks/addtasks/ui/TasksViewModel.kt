@@ -1,6 +1,5 @@
 package com.proyecto.tasks.addtasks.ui
 
-import android.util.Log
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -29,6 +28,14 @@ class TasksViewModel@Inject constructor():ViewModel() {
     }
 
     fun onCheckBoxSelected(taskModel: TaskModel) {
-        taskModel.selected = !taskModel.selected
+        val index = _task.indexOf(taskModel)
+        _task[index] = _task[index].let {
+            it.copy(selected = !it.selected)
+        }
+    }
+
+    fun onItemRemove(taskModel: TaskModel) {
+        val task = _task.find { it.id == taskModel.id }
+        _task.remove(task)
     }
 }

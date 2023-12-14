@@ -1,12 +1,11 @@
 package com.proyecto.tasks.addtasks.ui
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -31,8 +30,8 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
@@ -55,20 +54,25 @@ fun TasksScreen(tasksViewModel: TasksViewModel) {
 
 @Composable
 fun TaskList(tasksViewModel: TasksViewModel) {
-    val myTasks:List<TaskModel> = tasksViewModel.task
+    val myTasks: List<TaskModel> = tasksViewModel.task
     LazyColumn {
-        items(myTasks, key = {it.id}){
+        items(myTasks, key = { it.id }) {
             ItemTask(taskModel = it, tasksViewModel = tasksViewModel)
         }
     }
 }
 
 @Composable
-fun ItemTask(taskModel: TaskModel,tasksViewModel: TasksViewModel) {
+fun ItemTask(taskModel: TaskModel, tasksViewModel: TasksViewModel) {
     Card(
         Modifier
             .fillMaxWidth()
             .padding(horizontal = 14.dp, vertical = 7.dp)
+            .pointerInput(Unit) {
+                detectTapGestures (onLongPress = {
+                    tasksViewModel.onItemRemove(taskModel)
+                })
+            }
 
     ) {
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
@@ -77,7 +81,9 @@ fun ItemTask(taskModel: TaskModel,tasksViewModel: TasksViewModel) {
                     .weight(1f)
                     .padding(8.dp)
             )
-            Checkbox(checked = taskModel.selected, onCheckedChange = {tasksViewModel.onCheckBoxSelected(taskModel)})
+            Checkbox(
+                checked = taskModel.selected,
+                onCheckedChange = { tasksViewModel.onCheckBoxSelected(taskModel) })
         }
     }
 
