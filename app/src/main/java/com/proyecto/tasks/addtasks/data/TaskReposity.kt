@@ -15,4 +15,10 @@ class TaskReposity @Inject constructor(private val taskDao: TaskDao) {
     suspend fun add(taskModel: TaskModel) {
         taskDao.addTask(TaskEntity(taskModel.id, taskModel.task, taskModel.selected))
     }
+    suspend fun update (taskModel: TaskModel){
+        taskDao.updateTask(TaskEntity(taskModel.id, taskModel.task, taskModel.selected))
+    }
+    suspend fun delete(taskModel: TaskModel){
+        taskDao.deleteTask(TaskEntity(taskModel.id, taskModel.task, taskModel.selected))
+    }
 }
